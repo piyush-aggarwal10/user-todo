@@ -1,0 +1,31 @@
+.nav {
+    border-bottom: 1px solid #EAEAEA;
+    margin-bottom: 16px;
+  }
+  .nav-item {
+    height: 40px;
+    line-height: 40px;
+    
+  }
+  .nav-link {
+    line-height: 30px;
+    padding: 9px;
+    margin-right: 40px;   
+    border-bottom: 2px solid white;
+  }
+  /* .nav-link:target {
+    border-bottom: 2px solid #5BB6FF;
+  } */
+  .nav-link-text {
+    color: rgba(0, 0, 0, 0.774);
+    font-size: 18px;
+  }
+  /* .nav-link-text:target {
+    color: #5BB6FF;
+  } */
+  .page-not-found-div{
+    text-align: center;
+  }
+  .addButton {
+    margin-bottom: 15px;
+  }
