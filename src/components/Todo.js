@@ -26,7 +26,7 @@ function Todo(props) {
             dataIndex: 'operation',
             render: (text, record) => (
                 <Space size="middle">
-                    <a onClick={(e) => { editTodo(record.key, e) }}>Edit</a> |
+                    <a onClick={(e) => { onEditTodo(record.key, e) }}>Edit</a> |
                     <a onClick={(e) => { onDelete(record.key, e) }}>Delete</a>
                 </Space>
             )
@@ -40,7 +40,7 @@ function Todo(props) {
     }
 
     //Function to edit a todo
-    const editTodo = (key, e) => {
+    const onEditTodo = (key, e) => {
         setTodoKeyToEdit(key);
         setModalTitle("Edit Existing Todo");
         showModal();
