@@ -6,6 +6,7 @@ import './styles.css';
 import { Form, Input, Space, Button, Table, DatePicker } from 'antd';
 import "antd/dist/antd.css";
 
+//Component to show list of todos, edit todo, delete todo, add new todo
 function Todo(props) {
     const [form] = Form.useForm();
     const [visible, setVisible] = useState(false);
@@ -32,34 +33,40 @@ function Todo(props) {
         }
     ]);
 
-
-
+    //Function to delete a todo
     const onDelete = (key, e) => {
         e.preventDefault();
         props.deleteTodo(key);
     }
 
+    //Function to edit a todo
     const editTodo = (key, e) => {
         setTodoKeyToEdit(key);
         setModalTitle("Edit Existing Todo");
         showModal();
     }
 
+    //Function to hide modal window
+    const hideModal = () => {
+        setVisible(false);
+    }
+
+    //Function to show modal window
     const showModal = () => {
         setVisible(true);
     }
 
+    //Function to handle add todo action
     const addTodo = () => {
         setModalTitle("Add New Todo");
         showModal();
     }
 
-
+    //Function to handle modal Ok/Save action
     const onModalOk = todoDetails => {
-        console.log("Received values of todo from form: ", todoDetails);
         setVisible(false);
 
-        todoDetails.dateAdded = todoDetails.dateAdded.format('YYYY-MM-DD HH:mm:ss');
+        todoDetails.dateAdded = todoDetails.dateAdded.format('YYYY-MM-DD');
         if (!todoKeyToEdit) {
             //create new todo
             todoDetails.key = Math.random();
@@ -71,6 +78,7 @@ function Todo(props) {
         }
     };
 
+    //Todo details input form
     let todoForm = <Form
         form={form}
         layout="vertical"
@@ -114,6 +122,7 @@ function Todo(props) {
             <ModalWindow
                 visible={visible}
                 onModalOk={onModalOk}
+                hideModal={hideModal}
                 title={modalTitle}
                 onCancel={() => {
                     setVisible(false);
@@ -122,7 +131,6 @@ function Todo(props) {
                 form={form}
             />
             <Table
-                // rowSelection={rowSelection}
                 columns={columns}
                 dataSource={props.todos}
                 pagination={{ defaultCurrent: 1, defaultPageSize: 5 }}
@@ -141,7 +149,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         createTodo: (todoDetails) => dispatch(createTodo(todoDetails)),
-        // loadTodo: () => dispatch(loadTodo()),
         editTodo: (key, newTodoDetails) => dispatch(editTodo(key, newTodoDetails)),
         deleteTodo: (key) => dispatch(deleteTodo(key))
     }

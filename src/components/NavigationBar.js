@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import './styles.css';
 
+//Component to show Navigation bar
 function NavigationBar() {
     return (
         <div className="nav">

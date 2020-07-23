@@ -1,6 +1,6 @@
-import { CREATE_TODO, /*LOAD_TODO,*/ DELETE_TODO, EDIT_TODO } from './todoTypes';
+import { CREATE_TODO, DELETE_TODO, EDIT_TODO } from './todoTypes';
 
-//Contains all action creators
+//Action creator for create new todo
 export const createTodo = (todo) => {
     return {
         type: CREATE_TODO,
@@ -8,6 +8,7 @@ export const createTodo = (todo) => {
     }
 }
 
+//Action creator to edit existing todo
 export const editTodo = (key, todo) => {
     return {
         type: EDIT_TODO,
@@ -15,6 +16,7 @@ export const editTodo = (key, todo) => {
     }
 }
 
+//Action creator to delete existing todo
 export const deleteTodo = (key) => {
     return {
         type: DELETE_TODO,

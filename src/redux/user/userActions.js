@@ -1,6 +1,6 @@
-import { CREATE_USER, /*LOAD_USER,*/ DELETE_USER, EDIT_USER } from './userTypes';
+import { CREATE_USER, DELETE_USER, EDIT_USER } from './userTypes';
 
-//Contains all action creators
+//Action creator for create new user
 export const createUser = (user) => {
     return {
         type: CREATE_USER,
@@ -8,6 +8,7 @@ export const createUser = (user) => {
     }
 }
 
+//Action creator to edit existing user
 export const editUser = (key, user) => {
     return {
         type: EDIT_USER,
@@ -15,6 +16,7 @@ export const editUser = (key, user) => {
     }
 }
 
+//Action creator to delete existing user
 export const deleteUser = (key) => {
     return {
         type: DELETE_USER,

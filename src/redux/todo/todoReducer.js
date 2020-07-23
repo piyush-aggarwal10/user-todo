@@ -1,4 +1,4 @@
-import { CREATE_TODO, /*LOAD_TODO,*/ DELETE_TODO, EDIT_TODO } from './todoTypes';
+import { CREATE_TODO, DELETE_TODO, EDIT_TODO } from './todoTypes';
 
 const initialState = {
     todoList: []

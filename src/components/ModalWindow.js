@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './styles.css';
-import { Button, Modal, Form, Input, DatePicker } from 'antd';
+import { Modal } from 'antd';
 
-function ModalWindow({ visible, onCancel, title, onModalOk, formStructure, form, isNewData }) {
+//Component to show Modal Window
+function ModalWindow({ visible, onCancel, title, onModalOk, formStructure, form, isNewData, hideModal }) {
 
     const [confirmLoading, setConfirmLoading] = useState(false);
 
+    //Function to handle Save/Ok button click action
     const handleOk = (values) => {
+        onModalOk(values);
         setConfirmLoading(true);
         setTimeout(() => {
-            onModalOk(values);
             setConfirmLoading(false)
+            hideModal();
         }, 2000);
     }
 

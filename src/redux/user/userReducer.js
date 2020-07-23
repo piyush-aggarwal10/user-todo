@@ -1,4 +1,4 @@
-import { CREATE_USER, /*LOAD_USER,*/ DELETE_USER, EDIT_USER } from './userTypes';
+import { CREATE_USER, DELETE_USER, EDIT_USER } from './userTypes';
 
 const initialState = {
     userList: []

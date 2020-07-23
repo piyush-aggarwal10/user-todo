@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux';
-import { createUser, /*loadUser,*/ editUser, deleteUser } from '../redux';
+import { createUser, editUser, deleteUser } from '../redux';
 import ModalWindow from './ModalWindow';
 import './styles.css';
 import "antd/dist/antd.css";
 import { Button, Table, Form, Input, Space } from 'antd';
 
+//Component to show list of users, edit user, delete user, add new user
 function User(props) {
     const [form] = Form.useForm();
     const [visible, setVisible] = useState(false);
@@ -20,12 +21,11 @@ function User(props) {
             dataIndex: 'action',
             render: (text, record) => (
                 <Space size="middle">
-                    <a onClick={(e) => { editUser(record.key, e) }}>Edit</a> |
+                    <a onClick={(e) => { onEditUser(record.key, e) }}>Edit</a> |
                     <a onClick={(e) => { onDelete(record.key, e) }}>Delete</a>
                 </Space>
             )
         }]);
-
 
 
     const onDelete = (key, e) => {
@@ -33,54 +33,50 @@ function User(props) {
         props.deleteUser(key);
     }
 
-    const editUser = (key, e) => {
-        // e.preventDefault();
-        // props.editUser(key, newUserDetails);
+    //Function to edit user details
+    const onEditUser = (key, e) => {
+        e.preventDefault();
         setUserKeyToEdit(key);
         setModalTitle("Edit Existing User");
         showModal();
     }
 
-    // const onEdit = (values) => {
-    //     setVisible(false);
-    //     props.editUser(key, userDetails);
-    // }
-
-
-
+    //Function to show Modal window
     const showModal = () => {
         setVisible(true);
     }
 
+    //Function to hide Modal window
+    const hideModal = () => {
+        setVisible(false);
+    }
+
+    //Function to handle action to add new user
     const addUser = () => {
         setModalTitle("Add New User");
         showModal();
     }
 
-
+    //Function to handle modal window Ok/Save action
     const onModalOk = userDetails => {
-        console.log("Received values of user from form: ", userDetails);
-        setVisible(false);
-        //logic for saving user to db
-        if (!userKeyToEdit) {
-            //create new user
-            userDetails.key = Math.random();
-            props.createUser(userDetails);
+        if (userDetails) {
+            if (!userKeyToEdit) {
+                //create new user
+                userDetails.key = Math.random();
+                props.createUser(userDetails);
+            }
+            else {
+                //edit existing user
+                props.editUser(userKeyToEdit, userDetails);
+            }
         }
-        else {
-            //edit existing user
-            props.editUser(userKeyToEdit, userDetails);
-        }
-
     };
 
+    //User details input form
     let userForm = <Form
         form={form}
         layout="vertical"
         name="form_in_modal"
-        initialValues={{
-            modifier: "public"
-        }}
     >
         <Form.Item
             name="name"
@@ -120,6 +116,7 @@ function User(props) {
             <ModalWindow
                 visible={visible}
                 onModalOk={onModalOk}
+                hideModal={hideModal}
                 title={modalTitle}
                 onCancel={() => {
                     setVisible(false);
@@ -128,7 +125,6 @@ function User(props) {
                 form={form}
             />
             <Table
-                // rowSelection={rowSelection}
                 columns={columns}
                 dataSource={props.users}
                 pagination={{ defaultCurrent: 1, defaultPageSize: 5 }}

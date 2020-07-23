@@ -9,7 +9,7 @@ import Todo from './components/Todo';
 import PageNotFound from './components/PageNotFound';
 import NavigationBar from './components/NavigationBar';
 
-
+//Application's root component
 function App() {
   return (
     <Provider store={store}>
